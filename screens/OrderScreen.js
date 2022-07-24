@@ -3,8 +3,26 @@ import { View, Text, ScrollView, TouchableOpacity,Image } from 'react-native';
 import { XCircleIcon } from 'react-native-heroicons/solid';
 import {useNavigation} from "@react-navigation/native"
 import OrderCards from '../components/orderCards';
+import { useSelector } from 'react-redux';
 export default function OrderScreen() {
     const navigation=useNavigation()
+    const BasketItems=useSelector((state)=>state.Basket)
+    const res = [];
+    BasketItems.forEach(el => {
+      const index = res.findIndex(obj => {
+         return obj['name'] === el.name;
+      });
+      if(index === -1){
+         res.push({
+            "name": el.name,
+            "img":el.img,
+            "count": 1
+         })
+      }
+      else{
+         res[index]["count"]++;
+      };
+   });
   return (
     <View className="bg-gray-200 flex-1">
     <View className="bg-white">
@@ -29,9 +47,13 @@ export default function OrderScreen() {
       </TouchableOpacity>
     </View>
     <ScrollView className="mt-6">
-      <OrderCards/>
-      <OrderCards/>
-      <OrderCards/>
+      {
+        res.map((object,index)=>{
+          return(
+             <OrderCards key={index} Title={object.name} img={object.img} quantity={object.count}/>
+          ) 
+        })
+      }
     </ScrollView>
     <View className="bg-white px-4 pt-4 pb-2">
       <View className="flex-row justify-between">

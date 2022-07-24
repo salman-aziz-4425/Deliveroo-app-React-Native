@@ -8,18 +8,17 @@ import RestaurantScreen from './screens/RestaurantScreen';
 import OrderScreen from './screens/OrderScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import DeliveryScreen from './screens/DeliveryScreen';
-import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-export const store = configureStore({
-  reducer: {},
-})
+import { store } from './features/store';
 const Stack=createNativeStackNavigator()
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>
     <TailwindProvider>
     <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
+      
         <Stack.Screen name="Restaurant" component={RestaurantScreen} />
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen  name="Order" component={OrderScreen} />
@@ -31,6 +30,7 @@ export default function App() {
       </Stack.Navigator>
     </TailwindProvider>
     </NavigationContainer>
+    </Provider>
   );
 }
 
