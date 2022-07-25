@@ -52,7 +52,7 @@ export default function RestaurantScreen() {
      <TouchableOpacity className="flex-row  items-center px-3 pt-4 pb-4 space-x-2 border-y border-gray-300">
       <QuestionMarkCircleIcon size={20} color="gray" opacity={0.6}/>
       <Text className="pl-2 flex-1 text-md font-bold">Have a food allergy?</Text>
-      <ChevronRightIcon color="#00CCBB" size={20}/>
+      <ChevronRightIcon color="#D70F64" size={20}/>
      </TouchableOpacity>
      </View>
      <Text className="px-4 pt-6 mb-3 font-bold text-xl">Menu</Text>
